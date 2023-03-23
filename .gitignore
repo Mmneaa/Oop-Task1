@@ -1,52 +1,185 @@
-# Prerequisites
-*.d
+namespace ConsoleApp6
+{
+    class Employee
+    {
+        public string? Name;
+        public string? Gender;
+        public string? Address;
+        public string? Department;
+        public int age;
+        public int? id;
+        public int salary;
+        public int? phone;
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+        public Employee(string name, string gender, string address, string department, int age, int id, int salary, int phone)
+        {
+            this.Name = name;
+            this.Gender = gender;
+            this.Address = address;
+            this.Department = department;
+            this.age = age;
+            this.id = id;
+            this.salary = salary;
+            this.phone = phone;
+        }
+        public Employee(string name, string address, string department, int age, int id, int salary)
+        {
+            this.Name = name;
+            this.Address = address;
+            this.Department = department;
+            this.age = age;
+            this.id = id;
+            this.salary = salary;
+        }
+        public Employee(string name, string gender, int age, int salary, int phone)
+        {
+            this.Name = name;
+            this.Gender = gender;
+            this.age = age;
+            this.salary = salary;
+            this.phone = phone;
+        }
+        public Employee(string name, int age, int salary, int phone)
+        {
+            this.Name = name;
+            this.age = age;
+            this.salary = salary;
+            this.phone = phone;
+        }
+        public Employee(string name, string gender, string department, int id, int salary)
+        {
+            this.Name = name;
+            this.Gender = gender;
+            this.Department = department;
+            this.id = id;
+            this.salary = salary;
+        }
+        public void PrintAllInfo()
+        {
+            Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}", Name, Gender, Address, Department, age, id, salary, phone);
+        }
+    }
+    internal class Program
+    {
+        static int SumAge(Employee[] employees)
+        {
+            int sumage = 0;
+            for (int i = 0; i < employees.Length; i++)
+            {
+                sumage += employees[i].age;
+            }
+            return sumage;
+        }
+        static int MaxAge(Employee[] employees)
+        {
+            int maxage = employees[0].age;
+            for (int i = 0; i < employees.Length; i++)
+            {
+                if (maxage < employees[i].age)
+                {
+                    maxage = employees[i].age;
+                }
+            }
+            return maxage;
+        }
+        static double AverageAge(Employee[] employees)
+        {
+            return SumAge(employees) / employees.Length;
+        }
+        static int MinAge(Employee[] employees)
+        {
+            int minage = employees[0].age;
+            for (int i = 0; i < employees.Length; i++)
+            {
+                if (minage > employees[i].age)
+                {
+                    minage = employees[i].age;
+                }
+            }
+            return minage;
+        }
+        static int SumSalary(Employee[] employees)
+        {
+            int sumsalary = 0;
+            for (int i = 0; i < employees.Length; i++)
+            {
+                sumsalary += employees[i].salary;
+            }
+            return sumsalary;
+        }
 
-# Linker output
-*.ilk
-*.map
-*.exp
+        static int MaxSalary(Employee[] employees)
+        {
+            int maxsalary = employees[0].salary;
+            for (int i = 0; i < employees.Length; i++)
+            {
+                if (maxsalary < employees[i].salary)
+                {
+                    maxsalary = employees[i].salary;
+                }
+            }
+            return maxsalary;
+        }
 
-# Precompiled Headers
-*.gch
-*.pch
+        static double AverageSalary(Employee[] employees)
+        {
+            return SumSalary(employees) / employees.Length;
+        }
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+        static int MinSalary(Employee[] employees)
+        {
+            int minsalary = employees[0].salary;
+            for (int i = 0; i < employees.Length; i++)
+            {
+                if (minsalary > employees[i].salary)
+                {
+                    minsalary = employees[i].salary;
+                }
+            }
+            return minsalary;
+        }
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Please enter number of employees");
+            int Enum = int.Parse(Console.ReadLine());
+            Employee[] employees = new Employee[Enum];
+            
+            for (int i = 0; i < employees.Length; i++)
+            {
+                Console.WriteLine("Enter Employee Name");
+                string? Name = Console.ReadLine();
+                Console.WriteLine("Enter Employee Gender");
+                string? Gender = Console.ReadLine();
+                Console.WriteLine("Enter Employee Address");
+                string? Address = Console.ReadLine();
+                Console.WriteLine("Enter Employee Department");
+                string? Department = Console.ReadLine();
+                Console.WriteLine("Enter Employee Age");
+                int age = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Employee ID");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Employee Salary");
+                int salary = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Employee Phone");
+                int phone = int.Parse(Console.ReadLine());
+                employees[i] = new Employee(Name, Gender, Address, Department, age, id, salary, phone);
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+            }
+            foreach (Employee i in employees) 
+            { 
+                i.PrintAllInfo(); 
+            }
+            Console.WriteLine("Average Age is {0}",AverageAge(employees));
+            Console.WriteLine("Maximum Age is {0}",MaxAge(employees));
+            Console.WriteLine("Minimum Age is {0}", MinAge(employees));
+            Console.WriteLine("Average Salary is {0}", AverageSalary(employees));
+            Console.WriteLine("Maximum Age is {0}", MaxSalary(employees));
+            Console.WriteLine("Minimum Age is {0}", MinSalary(employees));
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+
+            Console.ReadKey();
+        }
+    }
+}
